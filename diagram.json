@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "author": "Andrés Calderón",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": -37.72, "left": -27.06, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": 171.98,
+      "left": -174.14,
+      "attrs": { "color": "red" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 189.05,
+      "left": -77.44,
+      "attrs": { "value": "330" }
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht8",
+      "top": 55.69,
+      "left": -265.6,
+      "rotate": 270,
+      "attrs": { "temperature": "43" }
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": -10.61,
+      "left": -268.96,
+      "rotate": 270,
+      "attrs": { "temperature": "20.7" }
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht2",
+      "top": -75.05,
+      "left": -271.39,
+      "rotate": 270,
+      "attrs": { "temperature": "29" }
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht3",
+      "top": -187.79,
+      "left": -178.6,
+      "attrs": { "temperature": "29" }
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht4",
+      "top": -190.42,
+      "left": -89.07,
+      "attrs": { "temperature": "24" }
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht5",
+      "top": -191.42,
+      "left": -2.8,
+      "attrs": { "temperature": "22" }
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht6",
+      "top": -190.79,
+      "left": 93.25,
+      "attrs": { "temperature": "31" }
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht7",
+      "top": -76.13,
+      "left": 206.18,
+      "rotate": 90,
+      "attrs": { "temperature": "18" }
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht9",
+      "top": -10.71,
+      "left": 205.22,
+      "rotate": 90,
+      "attrs": { "temperature": "22" }
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht10",
+      "top": 59.08,
+      "left": 203.47,
+      "rotate": 90,
+      "attrs": { "temperature": "16.3" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": 218.41,
+      "left": 37.82,
+      "attrs": { "color": "green" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ],
+    [ "esp:D2", "led1:A", "green", [ "h0" ] ],
+    [ "r1:2", "esp:GND.2", "green", [ "v0" ] ],
+    [ "r1:1", "led1:C", "green", [ "v0" ] ],
+    [ "dht8:VCC", "esp:3V3", "red", [ "h0" ] ],
+    [ "dht8:GND", "esp:GND.1", "black", [ "h0" ] ],
+    [ "dht8:SDA", "esp:D13", "green", [ "h-121.81", "v19.95" ] ],
+    [ "dht1:VCC", "esp:3V3", "red", [ "h0" ] ],
+    [ "dht1:GND", "esp:GND.1", "black", [ "h0" ] ],
+    [ "dht1:SDA", "esp:D12", "green", [ "h0" ] ],
+    [ "dht2:VCC", "esp:3V3", "red", [ "h0" ] ],
+    [ "dht2:GND", "esp:GND.1", "black", [ "h0" ] ],
+    [ "dht2:SDA", "esp:D14", "green", [ "h0" ] ],
+    [ "dht3:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "dht3:GND", "esp:GND.1", "black", [ "v0" ] ],
+    [ "dht3:SDA", "esp:D27", "green", [ "v0" ] ],
+    [ "dht4:GND", "esp:GND.1", "black", [ "v0" ] ],
+    [ "dht4:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "dht4:SDA", "esp:D26", "green", [ "v0" ] ],
+    [ "dht5:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "dht5:GND", "esp:GND.1", "black", [ "v0" ] ],
+    [ "dht5:SDA", "esp:D15", "green", [ "v0" ] ],
+    [ "dht6:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "dht6:GND", "esp:GND.1", "black", [ "v0" ] ],
+    [ "dht6:SDA", "esp:D23", "green", [ "v65.35", "h-37.9" ] ],
+    [ "dht7:VCC", "esp:3V3", "red", [ "h0" ] ],
+    [ "dht7:GND", "esp:GND.1", "black", [ "h0" ] ],
+    [ "dht7:SDA", "esp:D22", "green", [ "h0" ] ],
+    [ "dht9:VCC", "esp:3V3", "red", [ "h0" ] ],
+    [ "dht9:GND", "esp:GND.1", "black", [ "h0" ] ],
+    [ "dht9:SDA", "esp:D21", "green", [ "h0" ] ],
+    [ "dht10:VCC", "esp:3V3", "red", [ "h0" ] ],
+    [ "dht10:GND", "esp:GND.1", "black", [ "h0" ] ],
+    [ "dht10:SDA", "esp:D4", "green", [ "h22.49", "v86.79" ] ],
+    [ "dht10:SDA", "esp:D18", "green", [ "h55.32", "v61.68", "h54.08" ] ],
+    [ "esp:D5", "btn1:1.r", "green", [ "h0" ] ],
+    [ "btn1:2.l", "esp:GND.1", "green", [ "h0" ] ]
+  ],
+  "dependencies": {}
+}
