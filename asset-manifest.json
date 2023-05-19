@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/dresrodriguez55.github.io/wind-turbines-edge-ai/static/css/main.216b9262.css",
-    "main.js": "/dresrodriguez55.github.io/wind-turbines-edge-ai/static/js/main.1475a811.js",
-    "index.html": "/dresrodriguez55.github.io/wind-turbines-edge-ai/index.html",
-    "main.216b9262.css.map": "/dresrodriguez55.github.io/wind-turbines-edge-ai/static/css/main.216b9262.css.map",
-    "main.1475a811.js.map": "/dresrodriguez55.github.io/wind-turbines-edge-ai/static/js/main.1475a811.js.map"
+    "main.css": "/static/css/main.216b9262.css",
+    "main.js": "/static/js/main.6f610a99.js",
+    "index.html": "/index.html",
+    "main.216b9262.css.map": "/static/css/main.216b9262.css.map",
+    "main.6f610a99.js.map": "/static/js/main.6f610a99.js.map"
   },
   "entrypoints": [
     "static/css/main.216b9262.css",
-    "static/js/main.1475a811.js"
+    "static/js/main.6f610a99.js"
   ]
 }
