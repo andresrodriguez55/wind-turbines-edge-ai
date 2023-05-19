@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/wind-turbines-edge-ai/static/css/main.216b9262.css",
-    "main.js": "/wind-turbines-edge-ai/static/js/main.6110c818.js",
+    "main.js": "/wind-turbines-edge-ai/static/js/main.72efc15a.js",
     "index.html": "/wind-turbines-edge-ai/index.html",
     "main.216b9262.css.map": "/wind-turbines-edge-ai/static/css/main.216b9262.css.map",
-    "main.6110c818.js.map": "/wind-turbines-edge-ai/static/js/main.6110c818.js.map"
+    "main.72efc15a.js.map": "/wind-turbines-edge-ai/static/js/main.72efc15a.js.map"
   },
   "entrypoints": [
     "static/css/main.216b9262.css",
-    "static/js/main.6110c818.js"
+    "static/js/main.72efc15a.js"
   ]
 }
