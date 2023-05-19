@@ -1,13 +1,13 @@
 package com.windturbines.dataserver.api.controllers;
 
 import com.windturbines.dataserver.business.abstracts.UserService;
+import com.windturbines.dataserver.business.dto.requests.authentication.AuthenticateUserRequest;
 import com.windturbines.dataserver.business.dto.requests.create.CreateUserRequest;
 import com.windturbines.dataserver.business.dto.requests.update.UpdateUserRequest;
 import com.windturbines.dataserver.business.dto.responses.create.CreateUserResponse;
 import com.windturbines.dataserver.business.dto.responses.get.GetAllUserResponse;
 import com.windturbines.dataserver.business.dto.responses.update.UpdateUserResponse;
 import org.springframework.web.bind.annotation.RequestBody;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
