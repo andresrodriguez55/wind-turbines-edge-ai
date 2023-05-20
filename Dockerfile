@@ -1,7 +1,7 @@
 #FROM ibm-semeru-runtimes:open-17-jre-focal
 #FROM openjdk:17-jdk-slim
-FROM maven:3.8.2-jdk17 AS build
-RUN mvn clean package -DskipTests
+#FROM maven:3.8.2-jdk17 AS build
+#RUN mvn clean package -DskipTests
 
 
 # COPY target/windturbines-data-server-0.0.1-SNAPSHOT.jar /app/server.jar
