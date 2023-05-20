@@ -6,8 +6,8 @@
 
 # COPY target/windturbines-data-server-0.0.1-SNAPSHOT.jar /app/server.jar
 FROM openjdk:17-jdk-slim
-COPY --from=build /target/windturbines-data-server-0.0.1-SNAPSHOT.jar demo.jar
-ENV _JAVA_OPTIONS="-XX:MaxRAM=75m"
+COPY /target/windturbines-data-server-0.0.1-SNAPSHOT.jar demo.jar
+ENV _JAVA_OPTIONS="-XX:MaxRAM=70m"
 EXPOSE 8080
 # ENTRYPOINT ["java", "-XX:MaxRAM=70m", "-jar", "server.jar"]
 #CMD java $_JAVA_OPTIONS -jar server.jar
