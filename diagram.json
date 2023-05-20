@@ -24,7 +24,7 @@
       "top": 55.69,
       "left": -265.6,
       "rotate": 270,
-      "attrs": { "temperature": "43" }
+      "attrs": { "temperature": "42.1" }
     },
     {
       "type": "wokwi-dht22",
@@ -32,7 +32,7 @@
       "top": -10.61,
       "left": -268.96,
       "rotate": 270,
-      "attrs": { "temperature": "20.7" }
+      "attrs": { "temperature": "20.9" }
     },
     {
       "type": "wokwi-dht22",
@@ -40,35 +40,35 @@
       "top": -75.05,
       "left": -271.39,
       "rotate": 270,
-      "attrs": { "temperature": "29" }
+      "attrs": { "temperature": "27" }
     },
     {
       "type": "wokwi-dht22",
       "id": "dht3",
       "top": -187.79,
       "left": -178.6,
-      "attrs": { "temperature": "29" }
+      "attrs": { "temperature": "27" }
     },
     {
       "type": "wokwi-dht22",
       "id": "dht4",
       "top": -190.42,
       "left": -89.07,
-      "attrs": { "temperature": "24" }
+      "attrs": { "temperature": "22" }
     },
     {
       "type": "wokwi-dht22",
       "id": "dht5",
       "top": -191.42,
       "left": -2.8,
-      "attrs": { "temperature": "22" }
+      "attrs": { "temperature": "24" }
     },
     {
       "type": "wokwi-dht22",
       "id": "dht6",
       "top": -190.79,
       "left": 93.25,
-      "attrs": { "temperature": "31" }
+      "attrs": { "temperature": "29" }
     },
     {
       "type": "wokwi-dht22",
@@ -76,7 +76,7 @@
       "top": -76.13,
       "left": 206.18,
       "rotate": 90,
-      "attrs": { "temperature": "18" }
+      "attrs": { "temperature": "20.4" }
     },
     {
       "type": "wokwi-dht22",
@@ -84,7 +84,7 @@
       "top": -10.71,
       "left": 205.22,
       "rotate": 90,
-      "attrs": { "temperature": "22" }
+      "attrs": { "temperature": "25" }
     },
     {
       "type": "wokwi-dht22",
@@ -92,7 +92,7 @@
       "top": 59.08,
       "left": 203.47,
       "rotate": 90,
-      "attrs": { "temperature": "16.3" }
+      "attrs": { "temperature": "22.3" }
     },
     {
       "type": "wokwi-pushbutton",
