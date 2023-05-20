@@ -1,6 +1,6 @@
 #FROM ibm-semeru-runtimes:open-17-jre-focal
 #FROM openjdk:17-jdk-slim
-FROM maven:3.8.2-jdk-17 AS build
+FROM maven:3.8.2-jdk17 AS build
 RUN mvn clean package -DskipTests
 
 
