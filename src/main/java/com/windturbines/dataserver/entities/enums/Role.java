@@ -1,6 +1,9 @@
 package com.windturbines.dataserver.entities.enums;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 public enum Role
 {
-    Admin, Worker, Analyst;
+    ADMIN, ANALYST, TECHNICIAN;
 }

@@ -37,4 +37,20 @@ public class UserBusinessRules
             throw new BusinessException(Messages.User.NotExists);
         }
     }
+
+    public void checkIfUserExistsByEmail(String email)
+    {
+        if(!repository.existsByEmail(email))
+        {
+            throw new BusinessException(Messages.User.NotExists);
+        }
+    }
+
+    public void checkIfUserExistsByEmailAndPassword(String email, String password)
+    {
+        if(!repository.existsByEmailAndPassword(email, password))
+        {
+            throw new BusinessException(Messages.User.NotExists);
+        }
+    }
 }

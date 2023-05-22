@@ -1,7 +1,6 @@
 package com.windturbines.dataserver.business.dto.requests.create;
 
 import com.windturbines.dataserver.entities.enums.Role;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

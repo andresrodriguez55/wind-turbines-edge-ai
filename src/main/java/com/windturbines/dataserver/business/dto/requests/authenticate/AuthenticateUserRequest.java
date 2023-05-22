@@ -1,4 +1,4 @@
-package com.windturbines.dataserver.business.dto.requests.update;
+package com.windturbines.dataserver.business.dto.requests.authenticate;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,10 +9,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @Setter
 @Getter
-public class UpdateUserRequest
+public class AuthenticateUserRequest
 {
     private String email;
     private String password;
-    private String firstName;
-    private String lastName;
 }
