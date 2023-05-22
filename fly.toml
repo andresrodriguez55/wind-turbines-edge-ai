@@ -1,0 +1,14 @@
+# fly.toml app configuration file generated for windturbines-client-backend on 2023-05-19T15:09:22+03:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "windturbines-client-backend"
+primary_region = "mad"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
