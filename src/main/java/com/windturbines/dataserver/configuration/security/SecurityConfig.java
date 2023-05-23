@@ -13,6 +13,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
 
@@ -27,35 +30,38 @@ public class SecurityConfig
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
     {
         http
-                .csrf()
-                .disable()
-                .authorizeHttpRequests()
-                .requestMatchers( "/api/authentication")
-                .permitAll()
+                .csrf().disable();
+                //.cors().disable();
+        /*
+            .authorizeHttpRequests()
+            .requestMatchers( "/api/authentication")
+            .permitAll()
 
-                .and()
-                .authorizeHttpRequests()
-                .requestMatchers("/api/users/**").hasAnyRole(Role.ADMIN.name())
+            .and()
+            .authorizeHttpRequests()
+            .requestMatchers("/api/users/**").hasAnyRole(Role.ADMIN.name())
 
-                .requestMatchers(HttpMethod.GET,"/api/windturbines")
-                    .hasAnyRole(Arrays.stream(Role.values()).map(Enum::name).toArray(String[]::new))
-                .requestMatchers(HttpMethod.POST,"/api/windturbines").hasAnyRole(Role.ADMIN.name())
-                .requestMatchers(HttpMethod.DELETE,"/api/windturbines").hasAnyRole(Role.ADMIN.name())
+            .requestMatchers(HttpMethod.GET,"/api/windturbines")
+            .hasAnyRole(Arrays.stream(Role.values()).map(Enum::name).toArray(String[]::new))
+            .requestMatchers(HttpMethod.POST,"/api/windturbines").hasAnyRole(Role.ADMIN.name())
+            .requestMatchers(HttpMethod.DELETE,"/api/windturbines").hasAnyRole(Role.ADMIN.name())
 
-                .requestMatchers(HttpMethod.GET,"/api/histories")
-                    .hasAnyRole(Arrays.stream(Role.values()).map(Enum::name).toArray(String[]::new))
+            .requestMatchers(HttpMethod.GET,"/api/histories")
+            .hasAnyRole(Arrays.stream(Role.values()).map(Enum::name).toArray(String[]::new))
+            .requestMatchers(HttpMethod.GET,"/api/histories/**")
+            .hasAnyRole(Arrays.stream(Role.values()).map(Enum::name).toArray(String[]::new))
 
 
-                .anyRequest()
-                .authenticated()
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+            .anyRequest()
+            .authenticated()
+            .and()
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .authenticationProvider(authenticationProvider)
+            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+        */
 
         return http.build();
-
     }
 }

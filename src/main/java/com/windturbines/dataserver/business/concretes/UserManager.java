@@ -48,7 +48,7 @@ public class UserManager implements UserService
 
         var jwtToken = jwtService.generateToken(user);
 
-        GetAuthenticationResponse response = new GetAuthenticationResponse();
+        GetAuthenticationResponse response =mapper.map(user, GetAuthenticationResponse.class);
         response.setToken(jwtToken);
         return response;
     }

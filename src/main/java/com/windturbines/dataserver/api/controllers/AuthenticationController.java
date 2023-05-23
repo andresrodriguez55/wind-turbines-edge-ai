@@ -4,11 +4,9 @@ import com.windturbines.dataserver.business.abstracts.UserService;
 import com.windturbines.dataserver.business.dto.requests.authenticate.AuthenticateUserRequest;
 import com.windturbines.dataserver.business.dto.responses.authentication.GetAuthenticationResponse;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/authentication")
 @AllArgsConstructor
