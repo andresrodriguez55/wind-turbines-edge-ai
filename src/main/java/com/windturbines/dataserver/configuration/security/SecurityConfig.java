@@ -44,8 +44,11 @@ public class SecurityConfig
             .hasAnyRole(Arrays.stream(Role.values()).map(Enum::name).toArray(String[]::new))
             .requestMatchers(HttpMethod.POST,"/api/windturbines").hasAnyRole(Role.ADMIN.name())
             .requestMatchers(HttpMethod.DELETE,"/api/windturbines").hasAnyRole(Role.ADMIN.name())
+            .requestMatchers(HttpMethod.PUT,"/api/windturbines").hasAnyRole(Role.ADMIN.name())
 
-            .requestMatchers(HttpMethod.GET,"/api/histories")
+
+
+                .requestMatchers(HttpMethod.GET,"/api/histories")
             .hasAnyRole(Arrays.stream(Role.values()).map(Enum::name).toArray(String[]::new))
             .requestMatchers(HttpMethod.GET,"/api/histories/**")
             .hasAnyRole(Arrays.stream(Role.values()).map(Enum::name).toArray(String[]::new))
