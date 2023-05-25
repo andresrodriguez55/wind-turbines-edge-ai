@@ -30,9 +30,8 @@ public class SecurityConfig
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
     {
         http
-                .csrf().disable();
-                //.cors().disable();
-        /*
+                .csrf().disable()
+                .cors().and()
             .authorizeHttpRequests()
             .requestMatchers( "/api/authentication")
             .permitAll()
@@ -60,7 +59,7 @@ public class SecurityConfig
             .and()
             .authenticationProvider(authenticationProvider)
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-        */
+
 
         return http.build();
     }

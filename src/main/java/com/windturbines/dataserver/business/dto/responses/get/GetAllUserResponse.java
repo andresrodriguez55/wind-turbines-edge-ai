@@ -14,7 +14,6 @@ public class GetAllUserResponse
 {
     private Integer id;
     private String email;
-    private String password;
     private String firstName;
     private String lastName;
     private Role role;

@@ -1,4 +1,4 @@
-package com.windturbines.dataserver.business.dto.responses.get;
+package com.windturbines.dataserver.business.dto.requests.update;
 
 import com.windturbines.dataserver.entities.enums.Status;
 import lombok.AllArgsConstructor;
@@ -8,12 +8,11 @@ import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
 @Setter
-public class GetAllWindTurbineResponse
+@Getter
+public class UpdateWindTurbineRequest
 {
-    private int id;
-    private double latitude;
-    private double longitude;
+    private Double latitude;
+    private Double longitude;
     private Status status;
 }

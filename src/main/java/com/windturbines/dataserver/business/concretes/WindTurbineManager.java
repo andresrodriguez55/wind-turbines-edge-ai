@@ -2,10 +2,13 @@ package com.windturbines.dataserver.business.concretes;
 
 import com.windturbines.dataserver.business.abstracts.WindTurbineService;
 import com.windturbines.dataserver.business.dto.requests.create.CreateWindTurbineRequest;
+import com.windturbines.dataserver.business.dto.requests.update.UpdateWindTurbineRequest;
 import com.windturbines.dataserver.business.dto.responses.create.CreateWindTurbineResponse;
 import com.windturbines.dataserver.business.dto.responses.get.GetAllWindTurbineResponse;
+import com.windturbines.dataserver.business.dto.responses.update.UpdateWindTurbineResponse;
 import com.windturbines.dataserver.business.rules.WindTurbineBusinessRules;
 import com.windturbines.dataserver.entities.WindTurbine;
+import com.windturbines.dataserver.entities.enums.Status;
 import com.windturbines.dataserver.repository.WindTurbineRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -25,6 +28,7 @@ public class WindTurbineManager implements WindTurbineService
     public List<GetAllWindTurbineResponse> getAll()
     {
         List<WindTurbine> windTurbines = repository.findAll();
+
         List<GetAllWindTurbineResponse> responses = windTurbines
                 .stream().map(windTurbine -> mapper.map(windTurbine, GetAllWindTurbineResponse.class)).toList();
         return responses;
@@ -36,8 +40,21 @@ public class WindTurbineManager implements WindTurbineService
         //check if there is a turbine nearly
         WindTurbine windTurbine = mapper.map(request, WindTurbine.class);
         windTurbine.setId(0);
+        windTurbine.setStatus(Status.OFFLINE);
         WindTurbine savedWindTurbine = repository.save(windTurbine);
         CreateWindTurbineResponse response = mapper.map(savedWindTurbine, CreateWindTurbineResponse.class);
+        return response;
+    }
+
+    @Override
+    public UpdateWindTurbineResponse update(int id, UpdateWindTurbineRequest request)
+    {
+        rules.checkIfWindTurbineExists(id);
+        WindTurbine windTurbine = mapper.map(request, WindTurbine.class);
+        windTurbine.setId(id);
+
+        WindTurbine savedWindTurbine = repository.save(windTurbine);
+        UpdateWindTurbineResponse response = mapper.map(savedWindTurbine, UpdateWindTurbineResponse.class);
         return response;
     }
 
