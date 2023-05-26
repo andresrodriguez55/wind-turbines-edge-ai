@@ -90,6 +90,7 @@ public class UserManager implements UserService
         User user = mapper.map(request, User.class);
         user.setId(id);
         user.setPassword(getEncryptPassword(user.getPassword()));
+        user.setRole(request.getRole());
         repository.save(user);
         UpdateUserResponse response = mapper.map(user, UpdateUserResponse.class);
         return response;
