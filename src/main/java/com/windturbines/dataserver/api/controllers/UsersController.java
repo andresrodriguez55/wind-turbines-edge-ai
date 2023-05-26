@@ -35,7 +35,7 @@ public class UsersController
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<CreateUserResponse> add(@RequestBody CreateUserRequest request)
+    public CreateUserResponse add(@RequestBody CreateUserRequest request)
     {
         return service.add(request);
     }
