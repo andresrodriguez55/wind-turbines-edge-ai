@@ -30,29 +30,28 @@ public class SecurityConfig
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
     {
         http
-                .csrf().disable()
-                .cors().and()
+            .csrf().disable()
+            .cors().and()
             .authorizeHttpRequests()
             .requestMatchers( "/api/authentication")
             .permitAll()
 
             .and()
             .authorizeHttpRequests()
-            .requestMatchers("/api/users/**").hasAnyRole(Role.ADMIN.name())
+
+            .requestMatchers(HttpMethod.DELETE, "/api/users/**").hasRole(Role.ADMIN.name())
+            .requestMatchers(HttpMethod.PUT, "/api/users/**").hasRole(Role.ADMIN.name())
+            .requestMatchers(HttpMethod.GET, "/api/users").hasRole(Role.ADMIN.name())
+            .requestMatchers(HttpMethod.POST, "/api/users").hasRole(Role.ADMIN.name())
 
             .requestMatchers(HttpMethod.GET,"/api/windturbines")
+                .hasAnyRole(Arrays.stream(Role.values()).map(Enum::name).toArray(String[]::new))
+            .requestMatchers(HttpMethod.POST,"/api/windturbines").hasRole(Role.ADMIN.name())
+            .requestMatchers(HttpMethod.DELETE,"/api/windturbines/**").hasRole(Role.ADMIN.name())
+            .requestMatchers(HttpMethod.PUT,"/api/windturbines/**").hasRole(Role.ADMIN.name())
+
+            .requestMatchers(HttpMethod.GET,"/api/histories/windturbine/**")
             .hasAnyRole(Arrays.stream(Role.values()).map(Enum::name).toArray(String[]::new))
-            .requestMatchers(HttpMethod.POST,"/api/windturbines").hasAnyRole(Role.ADMIN.name())
-            .requestMatchers(HttpMethod.DELETE,"/api/windturbines").hasAnyRole(Role.ADMIN.name())
-            .requestMatchers(HttpMethod.PUT,"/api/windturbines").hasAnyRole(Role.ADMIN.name())
-
-
-
-                .requestMatchers(HttpMethod.GET,"/api/histories")
-            .hasAnyRole(Arrays.stream(Role.values()).map(Enum::name).toArray(String[]::new))
-            .requestMatchers(HttpMethod.GET,"/api/histories/**")
-            .hasAnyRole(Arrays.stream(Role.values()).map(Enum::name).toArray(String[]::new))
-
 
             .anyRequest()
             .authenticated()
@@ -62,7 +61,6 @@ public class SecurityConfig
             .and()
             .authenticationProvider(authenticationProvider)
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-
 
         return http.build();
     }
