@@ -37,7 +37,7 @@ public class UsersController
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<CreateUserResponse> add(@RequestBody CreateUserRequest request)
     {
-        return ResponseEntity.ok(service.add(request));
+        return service.add(request);
     }
 
     @PutMapping("/{id}")
