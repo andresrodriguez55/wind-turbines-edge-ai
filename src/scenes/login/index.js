@@ -1,99 +1,112 @@
-import React from 'react';
-import { useNavigate  } from "react-router-dom";
-import {Paper, Grid, Avatar, TextField, Button} from '@mui/material';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Paper, Grid, Avatar, TextField, Button, Typography, Box } from '@mui/material';
 import LockIcon from '@mui/icons-material/Lock';
-import "./login.css"
 
+import { setUser } from '../../utils/user';
+import { frontendUrls } from '../../utils/urls';
+import { backendUrls } from '../../utils/urls'; 
+import API from '../../utils/api';
 
-export default function Login()
+export default function Login() 
 {
-    const navigate = useNavigate();
-    const [disableButton, setDisableButton] = React.useState(false);
+  const navigate = useNavigate();
+  const [disableButton, setDisableButton] = useState(false);
 
-    React.useEffect(()=>
+  const handleSubmit = async (e, {isAnalyst = false}) => 
+  {
+    e.preventDefault();
+    setDisableButton(true);
+
+    const data = 
     {
-        /*
-        if(getToken() != null)
-            navigate("/admin", { replace: true })
-        */
-    }, []);
+      email: (isAnalyst) ? "demo" : document.getElementById('email').value,
+      password: (isAnalyst) ? "demo" : document.getElementById('password').value,
+    };
 
-    const submit=async(e)=>
+    try 
     {
-        e.preventDefault();
-        setDisableButton(true);
-
-        const data = {
-            "username": document.getElementById("Username").value,
-            "passwrd": document.getElementById("Password").value,
-        };
-
-        const URLToFetch =  "User/authenticate";
-        await fetch((URLToFetch),
+      const response = await API.post(backendUrls.postLogin, 
         {
-            method: "POST",
-            headers: {
-                'Content-Type': "application/json",
-            },
-            body: JSON.stringify(data)
-        }).then(async(response)=> await response.text().then(token=>
-        {
-            if(response.status == 401) alert("User does not exist...");
-            else if(response.status == 200)
-            {   
-                /*
-                setToken("Bearer "+token);
-                navigate("/admin", { replace: true });
-                */
-            }
-        })).catch(e => alert('Database connection error...'));
-        
-        setDisableButton(false);
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        }, data);
+  
+      setUser(response);
+      navigate(frontendUrls.dashboard, { replace: false });
+    } 
+    catch (error) 
+    {
+      alert(error.message);
     }
 
-    const paperStyle=
-    {
-        padding: "30px", 
-        height: "380px", 
-        width: "25%", 
-        margin: "100px auto"
-    };
-    const avatarStyle=
-    {
-        backgroundColor: "#1bbd7e"
-    };
-    const usernameTexFieldStyle = 
-    {
-        marginBottom: "10px"
-    };
-    const passwordTexFieldStyle = 
-    {
-        marginBottom: "35px"
-    };
+    setDisableButton(false);
+  };
 
-    return(
-        <div className="mainDiv">
-        <Grid>
-            <Paper elevation={12} style={paperStyle}>
-                <Grid align='center'>
-                    <Avatar style={avatarStyle}>
-                        <LockIcon/>
-                    </Avatar>
-                    <h2>Login</h2>
-                </Grid>
+  return (
+    <div>
+      <Grid>
+        <Paper elevation={12} 
+          sx=
+          {{
+              padding: '30px',
+              height: '420px',
+              width: '25%',
+              margin: '100px auto',
+          }}>
+          <Grid align="center">
+            <Avatar sx={{backgroundColor: '#1bbd7e'}}>
+              <LockIcon />
+            </Avatar>
+            <h2>Login</h2>
+          </Grid>
 
-                <form onSubmit={(e)=>submit(e)}>
-                    <TextField id='Username' label='Username' placeholder="Enter username" variant="standard" 
-                        style={usernameTexFieldStyle} fullWidth required/>
-                    <TextField id="Password" label="Password" placeholder="Enter password" type="password" 
-                        variant="standard" style={passwordTexFieldStyle} fullWidth required/>
+          <form onSubmit={(e) => handleSubmit(e, false)}>
+            <TextField
+              id="email"
+              label="Email"
+              placeholder="Enter email"
+              variant="standard"
+              sx={{marginBottom: '10px'}}
+              fullWidth
+              required
+            />
+            <TextField
+              id="password"
+              label="Password"
+              placeholder="Enter password"
+              type="password"
+              variant="standard"
+              sx={{marginBottom: '35px',}}
+              fullWidth
+              required
+            />
 
-                    <Button type='submit' color='primary' variant="contained" disabled={disableButton} fullWidth>
-                        Sign in
-                    </Button>
-                </form>
-            </Paper>
-        </Grid>
-        </div>
-    );
+            <Button type="submit" color="primary" variant="contained" disabled={disableButton} fullWidth>
+              Sign in
+            </Button>
+
+            <Box sx={{ height: "35px" }}/>
+            <Typography 
+              display="inline"
+              onClick={(e) => handleSubmit(e, {isAnalyst: true})}
+              sx={{ 
+                  top: '104px',
+                  fontFamily: 'Roboto',
+                  fontStyle: 'normal',
+                  fontWeight: 'normal',
+                  lineHeight: '24px',
+                  fontSize: '16px',
+                  letterSpacing: '0.18px',
+                  color: '#FFFFFF',
+                  margin: '16px 0px',
+                  cursor:  'pointer' 
+              }}>
+              You do not have an account? Continue as analyst!
+            </Typography>
+          </form>
+        </Paper>
+      </Grid>
+    </div>
+  );
 }

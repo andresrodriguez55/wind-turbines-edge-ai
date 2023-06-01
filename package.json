@@ -1,4 +1,5 @@
 {
+  "homepage": "https://andresrodriguez55.github.io/wind-turbines-edge-ai",
   "name": "react-admin",
   "version": "0.1.0",
   "private": true,
@@ -25,6 +26,7 @@
     "@testing-library/user-event": "^13.5.0",
     "chart.js": "^3.9.1",
     "formik": "^2.2.9",
+    "html2canvas": "^1.4.1",
     "leaflet": "^1.9.3",
     "react": "^18.2.0",
     "react-chartjs-2": "^4.3.1",
@@ -34,11 +36,14 @@
     "react-redux": "^8.0.2",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-to-pdf": "0.0.14",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },
   "scripts": {
     "start": "set PORT=3001 && react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

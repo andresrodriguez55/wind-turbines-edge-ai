@@ -39,7 +39,7 @@ const LineChartColumn = (title, listOfJsons, xAxisKey, yAxisKey) =>
                     </IconButton>
                 </Box>
             </Box>
-            <Box height="330px" m="-20px 0 0 0">
+            <Box height="370px" m="-20px 0 0 0">
                 <LineChart isDashboard={true} listOfJsons={listOfJsons} xAxisKey={xAxisKey} yAxisKey={yAxisKey}/>
             </Box>
         </Box>

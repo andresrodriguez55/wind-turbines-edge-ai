@@ -1,123 +1,84 @@
 import React from 'react';
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import { DataGrid, GridToolbarContainer, GridToolbarExport} from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import Header from "../../components/Header";
+import { getUser } from '../../utils/user';
 
-import {MapContainer, TileLayer, Marker, Popup} from "react-leaflet";
-import "leaflet/dist/leaflet.css"
-import L from "leaflet";
+import Map from '../../components/map';
 
-const Map = (windTurbines, {setSelectedWindTurbine}) =>
-{
-  L.Icon.Default.mergeOptions({
-    iconRetinaUrl: "",
-    iconUrl: "https://cdn-icons-png.flaticon.com/512/3616/3616597.png",
-    shadowUrl: "",
-    iconSize: [60, 60]
-  });
-
-  return(
-    <MapContainer 
-        center={[39.1667, 35.6667 ]}
-        zoom={6}
-        style={{width:"100%", height:"100%"}}
-    >
-        <TileLayer url="https://api.maptiler.com/maps/toner-v2/256/{z}/{x}/{y}.png?key=1QPy4iqeKBev2H36pTp0"
-            attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'/>
-        {
-          windTurbines.map((windturbine)=>
-            {
-                return(
-                    <Marker position={[windturbine["latitude"], windturbine["longitude"]]} 
-                    eventHandlers={{
-                        click: (e) => {
-                          setSelectedWindTurbine(windturbine)
-                        },
-                    }}>
-                        <Popup>
-                            Latitude: {windturbine["latitude"]}<br /> Longitude: {windturbine["longitude"]}
-                        </Popup>
-                    </Marker>
-                )
-            })
-        }
-      </MapContainer>
-  );
-}
+import { backendUrls } from '../../utils/urls';
+import API from '../../utils/api';
 
 const RawData = () => 
 {
-  const [selectedWindTurbine, setSelectedWindTurbine] = React.useState(1); 
+  const [selectedWindTurbine, setSelectedWindTurbine] = React.useState(null); 
   const [windTurbines, setWindTurbines] = React.useState([]);
   const [selectedWindTurbineHistories, setSelectedWindTurbineHistories] = React.useState([]);
-  
-  async function fetchWindTurbineHistories(id)
-  {
-      let urlToFetch = "http://localhost:8080/api/histories/windturbine/" + id +"?findTop18=false";
-      const response = await fetch(urlToFetch).then(async(response)=>
-      {
-          if(response.ok)
-          {
-              const jsonArray = await response.json();
-              setSelectedWindTurbineHistories(jsonArray);
-          }
-          else
-              console.log('Database connection error...');
-      }).catch(e => console.log(e));
-  };
-  
-  async function fetchWindTurbines()
-  {
-      let urlToFetch = "https://server-windturbines.onrender.com/"+"api/windturbines";
-      const response = await fetch(urlToFetch).then(async(response)=>
-      {
-          if(response.ok)
-          {
-              const jsonArray = await response.json();
-              setWindTurbines([...windTurbines, ...jsonArray]);
-          }
-          else
-            console.log('Database connection error...');
-      }).catch(e => console.log(e));
-  };
 
-  const isInitialMount = React.useRef(true);
+  const APIheaders = 
+  {
+    'Content-Type': "application/json",
+    'Accept': "*/*",
+    'Authorization': getUser().token
+  };
+  
+  const fetchWindTurbineHistories = async (id) => 
+  {
+    const urlToFetch = backendUrls.getWindTurbineHistories(id);
+    try 
+    {
+      const jsonArray = await API.get(urlToFetch, APIheaders);
+      setSelectedWindTurbineHistories(jsonArray);
+    } 
+    catch (error) 
+    {
+      console.log('Database connection error...');
+    }
+  };
+  
+  const fetchWindTurbines = async () => 
+  {
+    const urlToFetch =  backendUrls.getWindTurbines;
+    try 
+    {
+      const jsonArray = await API.get(urlToFetch, APIheaders);
+      setWindTurbines(jsonArray);
+    } 
+    catch (error) 
+    {
+      console.log('Database connection error...');
+    }
+  };
 
   React.useEffect(()=>
   {
-    if (isInitialMount.current) 
-    {
-      isInitialMount.current = false;
-    }
     fetchWindTurbines();
   }, []); //Only once time
 
   React.useEffect(()=>
   {
-    if (isInitialMount.current) 
-      return;
-
     if(windTurbines.length > 0)
       setSelectedWindTurbine(windTurbines[0]);
   }, [windTurbines]);
 
   React.useEffect(()=>
   {
-    if (isInitialMount.current || selectedWindTurbine == null) 
-      return;
-
-    fetchWindTurbineHistories(selectedWindTurbine["id"]);
+    if (selectedWindTurbine !== null) 
+    {
+      fetchWindTurbineHistories(selectedWindTurbine?.id);
+    }
   }, [selectedWindTurbine]); 
 
-  function CustomToolbar() {
+  function CustomToolbar() 
+  {
     return (
       <GridToolbarContainer >
         <GridToolbarExport 
           printOptions={{ disableToolbarButton: true }} 
           csvOptions={{ 
             allColumns: true, 
-            fileName: "ID-"+selectedWindTurbine['id']+"-Longitude-"+selectedWindTurbine['longitude']+"-Latitude-"+selectedWindTurbine['latitude']}} 
+            fileName: "ID-"+selectedWindTurbine?.id+"-Longitude-"+selectedWindTurbine?.longitude+"-Latitude-"+selectedWindTurbine?.latitude}} 
           style={{ color: 'white' }} />
       </GridToolbarContainer>
     );
@@ -125,7 +86,8 @@ const RawData = () =>
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const columns = [
+  const columns = 
+  [
     { field: "generatedAt", headerName: "Time", minWidth: 120},
     {
       field: "wecMinRotation",
@@ -175,27 +137,22 @@ const RawData = () =>
     },
   ];
 
-  if(windTurbines == null)
-    return(<div></div>);
-
   return (
     <Box m="20px">
-      <Header title="RAW DATA OF WIND TURBINES" subtitle={"Wind Turbine ID: "+selectedWindTurbine["id"]+" Selected"}  />
+      <Header title="RAW DATA OF WIND TURBINES" subtitle={"Wind Turbine ID: "+selectedWindTurbine?.id+" Selected"}  />
       <Box
         display="grid"
         gridTemplateColumns="repeat(12, 1fr)"
         gridAutoRows="200px"
         gap="20px"
       >
-
         <Box
           gridColumn="span 12"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
           p="30px"
         >
-
-          {Map(windTurbines, {setSelectedWindTurbine})}
+          <Map windTurbines={windTurbines} setSelectedWindTurbine={setSelectedWindTurbine} />
         </Box></Box>
 
       <Box
@@ -228,8 +185,8 @@ const RawData = () =>
         }}
       >
         <DataGrid disableColumnResize={false} rows={selectedWindTurbineHistories} columns={columns} components={{
-    Toolbar: CustomToolbar, 
-  }} />
+          Toolbar: CustomToolbar, 
+        }} />
         <Box sx={{height: "20px"}}/>
       </Box>
     </Box>

@@ -4,20 +4,14 @@ import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../theme";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import ArticleIcon from '@mui/icons-material/Article';
-import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
-import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
-import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
-import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import CycloneIcon from '@mui/icons-material/Cyclone';
+
+import { getUser } from "../../utils/user";
+import { frontendUrls } from "../../utils/urls";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -37,11 +31,36 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
-const Sidebar = () => {
+const Sidebar = () => 
+{
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+  const user = getUser();
+
+  const getAdminItems = () =>
+  {
+    if(user!=null && user["role"] == "ADMIN")
+      return (<>
+        <Item
+          title="Windturbines"
+          to={frontendUrls.adminWindturbines}
+          icon={<CycloneIcon />}
+          selected={selected}
+          setSelected={setSelected}
+        />
+
+        <Item
+          title="Users"
+          to={frontendUrls.adminUsers}
+          icon={<SupervisorAccountIcon />}
+          selected={selected}
+          setSelected={setSelected}
+        />
+      </>)
+  }
+
 
   return (
     <Box
@@ -84,7 +103,6 @@ const Sidebar = () => {
                 ml="15px"
               >
                 <Typography variant="h3" color={colors.grey[100]}>
-                  ADMIN
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
@@ -100,7 +118,7 @@ const Sidebar = () => {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={`../../assets/demo.png`}
+                  src={`https://cdn-icons-png.flaticon.com/512/149/149071.png`} //assests!!!!
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
@@ -111,10 +129,10 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Michael Cobain
+                  {user["firstName"] + " " + user["lastName"]}
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                Technician Admin
+                {user["role"]}
                 </Typography>
               </Box>
             </Box>
@@ -123,7 +141,7 @@ const Sidebar = () => {
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
               title="Dashboard"
-              to="/"
+              to={frontendUrls.dashboard}
               icon={<DashboardIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -131,11 +149,13 @@ const Sidebar = () => {
 
             <Item
               title="Raw Data"
-              to="/data"
+              to={frontendUrls.rawData}
               icon={<ArticleIcon />}
               selected={selected}
               setSelected={setSelected}
             />
+
+            {getAdminItems()}
           </Box>
         </Menu>
       </ProSidebar>

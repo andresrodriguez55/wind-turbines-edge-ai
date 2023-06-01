@@ -44,7 +44,7 @@ const LineChart = ({listOfJsons, xAxisKey, yAxisKey, isCustomLineColors = false,
       data={ responsiveLineData}
       axisBottom={
         {
-          tickValues: "every 6 months",
+          //format: (val) => val.substring(9, 16),
           tickRotation: 90,
         }
       }
@@ -82,7 +82,7 @@ const LineChart = ({listOfJsons, xAxisKey, yAxisKey, isCustomLineColors = false,
         },
       }}
       colors={isDashboard ? { datum: "color" } : { scheme: "nivo" }} // added
-      margin={{ top: 60, right: 60, bottom: 99, left: 70 }}
+      margin={{ top: 60, right: 60, bottom: 119, left: 70 }}
       xScale={{ type: "point" }}
       yScale={{
         type: "linear",
@@ -114,7 +114,6 @@ const LineChart = ({listOfJsons, xAxisKey, yAxisKey, isCustomLineColors = false,
       pointBorderColor={{ from: "serieColor" }}
       pointLabelYOffset={-12}
       useMesh={true}
-      
     />
   );
 };
