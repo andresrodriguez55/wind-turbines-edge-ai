@@ -1,19 +1,3 @@
-<head>
-    <style>
-
-       
-    h1, h2, h3, h4 {
-        margin: 15px 0px -1px;
-    }
-
-	p {
-        margin: -11px 0px 0px;
-    }
-
-	
-    </style>
-</head>
-
 <a href="https://github.com/andresrodriguez55/wind-turbines-edge-ai" target="_blank">Click to see the github repository</a>
     <h1>1. Introduction</h1>
     <p>
