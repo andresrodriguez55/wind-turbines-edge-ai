@@ -14,7 +14,7 @@
                  <li>Delamination</li>
              </ul>
          </li>
-         <li>Intrinsic error types
+         <li>Internal error types
              <ul>
                  <li>Electrical faults</li>
                  <li>Mechanical malfunctions</li>
