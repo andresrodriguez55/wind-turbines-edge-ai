@@ -1,5 +1,4 @@
-<a href="https://github.com/andresrodriguez55/wind-turbines-edge-ai" target="_blank">Click to see the github repository</a>
-    <h1>1. Introduction</h1>
+ <h1>1. Introduction</h1>
     <p>
         Today, the use and production of accurate and effective energy is increasing day by day. However, the majority of energy production is still made from non-renewable sources such as carbon, oil and natural gas. This situation leads to a decrease in the relevant resources. In addition, more energy needs arise in the world due to reasons such as population growth and technology development. For this reason, more use of carbon-based resources will lead to the depletion of these resources in the future. In addition, it should not be forgotten that fossil fuels such as oil and coal cause ecological pollution. For this reason, it has become inevitable to seek and use more harmless and renewable resources. Renewable resources can result in unlimited energy production and do not cause any harm to nature. For this reason, in recent years, we frequently see and use renewable resources such as geothermal, solar, wave and wind.
     </p>
